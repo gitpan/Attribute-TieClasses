@@ -1,0 +1,9 @@
+Changes
+MANIFEST
+Makefile.PL
+README
+TieClasses.pm
+test.pl
+testlib/Tie/Array/Test.pm
+testlib/Tie/Hash/Test.pm
+testlib/Tie/Scalar/Test.pm
