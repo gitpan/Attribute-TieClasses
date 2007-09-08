@@ -5,7 +5,7 @@ use strict;
 use Attribute::Handlers;
 no warnings 'redefine';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # Define for each attribute which class to use for which type of
 # attribute. I.e., one attribute can cause the referent to be tied
@@ -257,24 +257,34 @@ omissions, please contact me at <marcel@codewerk.com>.
     my $ff : FlipFlop(qw/Red Green/);
     print "$ff\n" for 1..5;
 
-=head1 BUGS
+=head1 BUGS AND LIMITATIONS
 
-None known so far. If you find any bugs or oddities, please do inform the
-author.
+No bugs have been reported.
+
+Please report any bugs or feature requests to
+C<bug-attribute-tieclasses@rt.cpan.org>, or through the web interface at
+L<http://rt.cpan.org>.
+
+=head1 INSTALLATION
+
+See perlmodinstall for information and options on installing Perl modules.
+
+=head1 AVAILABILITY
+
+The latest version of this module is available from the Comprehensive Perl
+Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a CPAN
+site near you. Or see <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
 
 =head1 AUTHOR
 
-Marcel GrE<uuml>nauer, <marcel@codewerk.com>
+Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright 2001 Marcel GrE<uuml>nauer. All rights reserved.
+Copyright 2001-2007 by Marcel GrE<uuml>nauer
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
-=head1 SEE ALSO
-
-perl(1), Attribute::Handlers(3pm).
-
 =cut
+

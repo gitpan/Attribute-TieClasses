@@ -1,5 +1,10 @@
 Revision history for Perl extension Attribute::TieClasses.
 
+0.02  So Sep  9 00:17:49 CEST 2007
+	- converted to new-style distro (ShipIt, Module::Install)
+    - fixed documentation
+    - moved files to where they should be
+
 0.01  Fri May 18 13:44:20 2001
 	- original version; created by h2xs 1.20 with options
 		-XA -n Attribute::TieClasses

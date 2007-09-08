@@ -1,134 +1,27 @@
-NAME
-    Attribute::TieClasses - attribute wrappers for CPAN Tie classes
+This is the Perl module Attribute::TieClasses.
 
-SYNOPSIS
-      use Attribute::TieClasses;
-      my $k : Timeout(EXPIRES => '+2s');
-      # loads in Tie::Scalar::Timeout and tie()s $k with those options
+INSTALLATION
 
-DESCRIPTION
-    Damian Conway's wonderful `Attribute::Handlers' module provides an easy
-    way to use attributes for `tie()'ing variables. In effect, the code in
-    the synopsis is simply
+Attribute::TieClasses installation is straightforward. If your CPAN shell is
+set up, you should just be able to do
 
-            use Attribute::Handlers
-                autotie => { Timeout => 'Tie::Scalar::Timeout' };
+    % cpan Attribute::TieClasses
 
-    Still, going one step further, it might be useful to have centrally
-    defined attributes corresponding to commonly used Tie classes found on
-    CPAN.
+Download it, unpack it, then build it as per the usual:
 
-    Simply `use()'ing this module doesn't bring in all those potential Tie
-    classes; they are only loaded when an attribute is actually used.
+    % perl Makefile.PL
+    % make && make test
 
-    The following attributes are defined:
+Then install it:
 
-      Attribute name(s)  Variable ref  Class the variable is tied to
-      =================  ============  =============================
-      Alias              HASH          Tie::AliasHash
-      Aliased            HASH          Tie::AliasHash
-      Cache              HASH          Tie::Cache
-      CharArray          ARRAY         Tie::CharArray
-      Counter            SCALAR        Tie::Counter
-      Cycle              SCALAR        Tie::Cycle
-      DBI                HASH          Tie::DBI
-      Decay              SCALAR        Tie::Scalar::Decay
-      Defaults           HASH          Tie::HashDefaults
-      Dict               HASH          Tie::TieDict
-      Dir                HASH          Tie::Dir
-      DirHandle          HASH          Tie::DirHandle
-      Discovery          HASH          Tie::Discovery
-      Dx                 HASH          Tie::DxHash
-      Encrypted          HASH          Tie::EncryptedHash
-      FileLRU            HASH          Tie::FileLRUCache
-      Fixed              HASH          Tie::SubstrHash
-      FlipFlop           SCALAR        Tie::FlipFlop
-      IPAddrKeyed        HASH          Tie::NetAddr::IP
-      Insensitive        HASH          Tie::CPHash
-      Ix                 HASH          Tie::IxHash
-      LDAP               HASH          Tie::LDAP
-      LRU                HASH          Tie::Cache::LRU
-      ListKeyed          HASH          Tie::ListKeyedHash
-      Math               HASH          Tie::Math
-      Mmap               ARRAY         Tie::MmapArray
-      NumRange           SCALAR        Tie::NumRange
-      NumRangeWrap       SCALAR        Tie::NumRangeWrap (in Tie::NumRange)
-      Offset             ARRAY         Tie::OffsetArray
-      Ordered            HASH          Tie::LLHash
-      PackedInt          ARRAY         Tie::IntegerArray
-      PerFH              SCALAR        Tie::PerFH
-      Persistent         HASH          Tie::Persistent
-      RDBM               HASH          Tie::RDBM
-      Range              HASH          Tie::RangeHash
-      RangeKeyed         HASH          Tie::RangeHash
-      Rank               HASH          Tie::Hash::Rank
-      Ranked             HASH          Tie::Hash::Rank
-      Ref                HASH          Tie::RefHash
-      Regexp             HASH          Tie::RegexpHash
-      RegexpKeyed        HASH          Tie::RegexpHash
-      Secure             HASH          Tie::SecureHash
-      Sentient           HASH          Tie::SentientHash
-      Shadow             HASH          Tie::ShadowHash
-      Shadowed           HASH          Tie::ShadowHash
-      Sort               HASH          Tie::SortHash
-      Sorted             HASH          Tie::SortHash
-      Strict             HASH          Tie::StrictHash
-      Substr             HASH          Tie::SubstrHash
-      TextDir            HASH          Tie::TextDir
-      Timeout            SCALAR        Tie::Scalar::Timeout
-      Toggle             SCALAR        Tie::Toggle
-      Transact           HASH          Tie::TransactHash
-      TwoLevel           HASH          Tie::TwoLevelHash
-      Vec                ARRAY         Tie::VecArray
-      Vector             ARRAY         Tie::VecArray
-      WarnGlobal         SCALAR        Tie::WarnGlobal::Scalar
+    % make install
 
-    I haven't had occasion to test all of these attributes; they were taken
-    from the module descriptions on CPAN. For some modules where the name
-    didn't ideally translate into an attribute name (e.g.,
-    `Tie::NetAddr::IP'), I have taken some artistic liberty to create an
-    attribute name. Some tie classes require the use of the return value
-    from `tie()' and are as such not directly usable by this mechanism,
-    AFAIK.
+DOCUMENTATION
 
-    No censoring has been done as far as possible; there are several
-    attributes that accomplish more or less the same thing. TIMTOWTDI.
+Attribute::TieClasses documentation is available as in POD. So you can do:
 
-    If you want any attribute added or renamed or find any mistakes or
-    omissions, please contact me at <marcel@codewerk.com>.
+    % perldoc Attribute::TieClasses
 
-EXAMPLES
-        # Tie::Scalar::Timeout
-        my $m : Timeout(NUM_USES => 3, VALUE => 456, POLICY => 777);
-        print "$m\n" for 1..5;
+to read the documentation online with your favorite pager.
 
-        # Tie::Hash::Rank
-        my %scores : Ranked;
-        %scores = (
-            Adams   => 78,
-            Davies  => 35,
-            Edwards => 84,
-            Thomas  => 47
-        );
-        print "$_: $scores{$_}\n" for qw(Adams Davies Edwards Thomas);
-
-        # Tie::FlipFlop;
-        my $ff : FlipFlop(qw/Red Green/);
-        print "$ff\n" for 1..5;
-
-BUGS
-    None known so far. If you find any bugs or oddities, please do inform
-    the author.
-
-AUTHOR
-    Marcel Grünauer, <marcel@codewerk.com>
-
-COPYRIGHT
-    Copyright 2001 Marcel Grünauer. All rights reserved.
-
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
-
-SEE ALSO
-    perl(1), Attribute::Handlers(3pm).
-
+Marcel Gruenauer
