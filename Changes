@@ -1,5 +1,9 @@
 Revision history for Perl extension Attribute::TieClasses.
 
+0.03  Do Okt 18 10:09:39 CEST 2007
+	- fixed version requirement of Test::More
+    - added t/perlcriticrc
+
 0.02  So Sep  9 00:17:49 CEST 2007
 	- converted to new-style distro (ShipIt, Module::Install)
     - fixed documentation

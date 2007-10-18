@@ -5,7 +5,7 @@ use strict;
 use Attribute::Handlers;
 no warnings 'redefine';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 # Define for each attribute which class to use for which type of
 # attribute. I.e., one attribute can cause the referent to be tied
