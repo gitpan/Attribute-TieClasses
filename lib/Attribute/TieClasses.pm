@@ -1,128 +1,129 @@
-package Attribute::TieClasses;
-
+use 5.008;
 use warnings;
 use strict;
+
+package Attribute::TieClasses;
+our $VERSION = '1.100710';
+# ABSTRACT: Attribute wrappers for CPAN Tie classes
+
 use Attribute::Handlers;
 no warnings 'redefine';
-
-our $VERSION = '0.03';
 
 # Define for each attribute which class to use for which type of
 # attribute. I.e., one attribute can cause the referent to be tied
 # to different classes depending on whether the referent is a scalar,
 # an array etc.
 # Each hash value can be a string or a reference to an array of strings.
-
 our %tieclass = (
-    __TEST        => [qw/ SCALAR=Tie::Scalar::Test ARRAY=Tie::Array::Test
-	HASH=Tie::Hash::Test /],    # used for test.pl; ignore
-    Alias         => 'HASH=Tie::AliasHash',
-    Cache         => 'HASH=Tie::Cache',
-    CharArray     => 'ARRAY=Tie::CharArray',
-    Counter       => 'SCALAR=Tie::Counter',
-    Cycle         => 'SCALAR=Tie::Cycle',
-    DBI           => 'HASH=Tie::DBI',
-    Decay         => 'SCALAR=Tie::Scalar::Decay',
-    Defaults      => 'HASH=Tie::HashDefaults',
-    Dict          => 'HASH=Tie::TieDict',
-    Dir           => 'HASH=Tie::Dir',
-    DirHandle     => 'HASH=Tie::DirHandle',
-    Discovery     => 'HASH=Tie::Discovery',
-    Dx            => 'HASH=Tie::DxHash',
-    Encrypted     => 'HASH=Tie::EncryptedHash',
-    FileLRU       => 'HASH=Tie::FileLRUCache',
-    FlipFlop      => 'SCALAR=Tie::FlipFlop',
-    IPAddrKeyed   => 'HASH=Tie::NetAddr::IP',
-    Insensitive   => 'HASH=Tie::CPHash',
-    Ix            => 'HASH=Tie::IxHash',
-    LDAP          => 'HASH=Tie::LDAP',
-    LRU           => 'HASH=Tie::Cache::LRU',
-    ListKeyed     => 'HASH=Tie::ListKeyedHash',
-    Math          => 'HASH=Tie::Math',
-    Mmap          => 'ARRAY=Tie::MmapArray',
-    NumRange      => 'SCALAR=Tie::NumRange',
-    NumRangeWrap  => 'SCALAR=Tie::NumRangeWrap=Tie::NumRange',
-    Offset        => 'ARRAY=Tie::OffsetArray',
-    Ordered       => 'HASH=Tie::LLHash',
-    PackedInt     => 'ARRAY=Tie::IntegerArray',
-    PerFH         => 'SCALAR=Tie::PerFH',
-    Persistent    => 'HASH=Tie::Persistent',
-    RDBM          => 'HASH=Tie::RDBM',
-    Range         => 'HASH=Tie::RangeHash',
-    Rank          => 'HASH=Tie::Hash::Rank',
-    Ref           => 'HASH=Tie::RefHash',
-    Regexp        => 'HASH=Tie::RegexpHash',
-    Secure        => 'HASH=Tie::SecureHash',
-    Sentient      => 'HASH=Tie::SentientHash',
-    Shadow        => 'HASH=Tie::ShadowHash',
-    Sort          => 'HASH=Tie::SortHash',
-    Strict        => 'HASH=Tie::StrictHash',
-    Substr        => 'HASH=Tie::SubstrHash',
-    TextDir       => 'HASH=Tie::TextDir',
-    Timeout       => 'SCALAR=Tie::Scalar::Timeout',
-    Toggle        => 'SCALAR=Tie::Toggle',
-    Transact      => 'HASH=Tie::TransactHash',
-    TwoLevel      => 'HASH=Tie::TwoLevelHash',
-    Vec           => 'ARRAY=Tie::VecArray',
-    WarnGlobal    => 'SCALAR=Tie::WarnGlobal::Scalar',
+    __TEST => [
+        qw/ SCALAR=Tie::Scalar::Test ARRAY=Tie::Array::Test
+          HASH=Tie::Hash::Test /
+    ],    # used for test.pl; ignore
+    Alias        => 'HASH=Tie::AliasHash',
+    Cache        => 'HASH=Tie::Cache',
+    CharArray    => 'ARRAY=Tie::CharArray',
+    Counter      => 'SCALAR=Tie::Counter',
+    Cycle        => 'SCALAR=Tie::Cycle',
+    DBI          => 'HASH=Tie::DBI',
+    Decay        => 'SCALAR=Tie::Scalar::Decay',
+    Defaults     => 'HASH=Tie::HashDefaults',
+    Dict         => 'HASH=Tie::TieDict',
+    Dir          => 'HASH=Tie::Dir',
+    DirHandle    => 'HASH=Tie::DirHandle',
+    Discovery    => 'HASH=Tie::Discovery',
+    Dx           => 'HASH=Tie::DxHash',
+    Encrypted    => 'HASH=Tie::EncryptedHash',
+    FileLRU      => 'HASH=Tie::FileLRUCache',
+    FlipFlop     => 'SCALAR=Tie::FlipFlop',
+    IPAddrKeyed  => 'HASH=Tie::NetAddr::IP',
+    Insensitive  => 'HASH=Tie::CPHash',
+    Ix           => 'HASH=Tie::IxHash',
+    LDAP         => 'HASH=Tie::LDAP',
+    LRU          => 'HASH=Tie::Cache::LRU',
+    ListKeyed    => 'HASH=Tie::ListKeyedHash',
+    Math         => 'HASH=Tie::Math',
+    Mmap         => 'ARRAY=Tie::MmapArray',
+    NumRange     => 'SCALAR=Tie::NumRange',
+    NumRangeWrap => 'SCALAR=Tie::NumRangeWrap=Tie::NumRange',
+    Offset       => 'ARRAY=Tie::OffsetArray',
+    Ordered      => 'HASH=Tie::LLHash',
+    PackedInt    => 'ARRAY=Tie::IntegerArray',
+    PerFH        => 'SCALAR=Tie::PerFH',
+    Persistent   => 'HASH=Tie::Persistent',
+    RDBM         => 'HASH=Tie::RDBM',
+    Range        => 'HASH=Tie::RangeHash',
+    Rank         => 'HASH=Tie::Hash::Rank',
+    Ref          => 'HASH=Tie::RefHash',
+    Regexp       => 'HASH=Tie::RegexpHash',
+    Secure       => 'HASH=Tie::SecureHash',
+    Sentient     => 'HASH=Tie::SentientHash',
+    Shadow       => 'HASH=Tie::ShadowHash',
+    Sort         => 'HASH=Tie::SortHash',
+    Strict       => 'HASH=Tie::StrictHash',
+    Substr       => 'HASH=Tie::SubstrHash',
+    TextDir      => 'HASH=Tie::TextDir',
+    Timeout      => 'SCALAR=Tie::Scalar::Timeout',
+    Toggle       => 'SCALAR=Tie::Toggle',
+    Transact     => 'HASH=Tie::TransactHash',
+    TwoLevel     => 'HASH=Tie::TwoLevelHash',
+    Vec          => 'ARRAY=Tie::VecArray',
+    WarnGlobal   => 'SCALAR=Tie::WarnGlobal::Scalar',
 );
 
 # Define synonyms for each attribute. Each synonym creates another handler,
 # so use them sparingly.
 # Each hash value can be a string or a reference to an array of strings.
-
 our %synonyms = (
-    Alias   => 'Aliased',
-    Range   => 'RangeKeyed',
-    Rank    => 'Ranked',
-    Regexp  => 'RegexpKeyed',
-    Shadow  => 'Shadowed',
-    Sort    => 'Sorted',
-    Substr  => 'Fixed',
-    Vec     => 'Vector',
+    Alias  => 'Aliased',
+    Range  => 'RangeKeyed',
+    Rank   => 'Ranked',
+    Regexp => 'RegexpKeyed',
+    Shadow => 'Shadowed',
+    Sort   => 'Sorted',
+    Substr => 'Fixed',
+    Vec    => 'Vector',
 );
 
 # create a handler sub for each attribute definition and each synonym of same
 for my $attr (keys %tieclass) {
-	my $attrdef = $tieclass{$attr};
-	$attrdef = [ $attrdef ] unless ref $attrdef eq 'ARRAY';
-	for my $def (@$attrdef) {
-		my ($reftype, $tieclass, $filename) = split /=/, $def;
-		$filename ||= $tieclass;
-		my $syns = defined $synonyms{$attr} ? $synonyms{$attr} : [];
-		$syns = [ $syns ] unless ref $syns eq 'ARRAY';
-		mkhandler($_, $reftype, $tieclass, $filename) for $attr, @$syns;
-	}
+    my $attrdef = $tieclass{$attr};
+    $attrdef = [$attrdef] unless ref $attrdef eq 'ARRAY';
+    for my $def (@$attrdef) {
+        my ($reftype, $tieclass, $filename) = split /=/, $def;
+        $filename ||= $tieclass;
+        my $syns = defined $synonyms{$attr} ? $synonyms{$attr} : [];
+        $syns = [$syns] unless ref $syns eq 'ARRAY';
+        make_handler($_, $reftype, $tieclass, $filename) for $attr, @$syns;
+    }
 }
 
 # generate and eval the handler code
-sub mkhandler {
-	my ($attr, $reftype, $tieclass, $filename) = @_;
-	$filename ||= $tieclass;  # might be several classes in one file
-	my $code = qq!
+sub make_handler {
+    my ($attr, $reftype, $tieclass, $filename) = @_;
+    $filename ||= $tieclass;    # might be several classes in one file
+    my $code = qq!
 	    sub UNIVERSAL::$attr : ATTR($reftype) {
 		my (\$ref, \$data) = \@_[2,4];
 		\$data = [ \$data ] unless ref \$data eq 'ARRAY';
 		eval "use $filename; 1";
 	!;
-	
-	if    ($reftype eq 'SCALAR') { $code .= mktie_scalar($tieclass) }
-	elsif ($reftype eq 'ARRAY' ) { $code .= mktie_array ($tieclass) }
-	elsif ($reftype eq 'HASH'  ) { $code .= mktie_hash  ($tieclass) }
-	elsif ($reftype eq 'VAR'   ) { $code .= mktie_var   ($tieclass) }
-	else  { die "unknown attribute type $reftype" }
-
-	$code .= "\n} 1\n";
-	eval $code or die "Internal error: $@";
+    if    ($reftype eq 'SCALAR') { $code .= make_tie_scalar($tieclass) }
+    elsif ($reftype eq 'ARRAY')  { $code .= make_tie_array($tieclass) }
+    elsif ($reftype eq 'HASH')   { $code .= make_tie_hash($tieclass) }
+    elsif ($reftype eq 'VAR')    { $code .= make_tie_var($tieclass) }
+    else                         { die "unknown attribute type $reftype" }
+    $code .= "\n} 1\n";
+    eval $code or die "Internal error: $@";
 }
 
 # subs to generate the variant parts of the attr handler code
-sub mktie_scalar { "tie \$\$ref, '$_[0]', \@\$data\n" }
-sub mktie_array  { "tie \@\$ref, '$_[0]', \@\$data\n" }
-sub mktie_hash   { "tie \%\$ref, '$_[0]', \@\$data\n" }
-sub mktie_var    {
-	my $tieclass = shift;
-	return qq{
+sub make_tie_scalar { "tie \$\$ref, '$_[0]', \@\$data\n" }
+sub make_tie_array  { "tie \@\$ref, '$_[0]', \@\$data\n" }
+sub make_tie_hash   { "tie \%\$ref, '$_[0]', \@\$data\n" }
+
+sub make_tie_var {
+    my $tieclass = shift;
+    return qq{
 		my \$type = ref \$ref;
 		 (\$type eq 'SCALAR')? tie \$\$ref,'$tieclass',\@\$data
 		:(\$type eq 'ARRAY') ? tie \@\$ref,'$tieclass',\@\$data
@@ -130,13 +131,19 @@ sub mktie_var    {
 		: die "Internal error: can't autotie \$type"
 	}
 }
-
 1;
+
+
 __END__
+=pod
 
 =head1 NAME
 
-Attribute::TieClasses - attribute wrappers for CPAN Tie classes
+Attribute::TieClasses - Attribute wrappers for CPAN Tie classes
+
+=head1 VERSION
+
+version 1.100710
 
 =head1 SYNOPSIS
 
@@ -237,6 +244,38 @@ attributes that accomplish more or less the same thing. TIMTOWTDI.
 If you want any attribute added or renamed or find any mistakes or
 omissions, please contact me at <marcel@codewerk.com>.
 
+=head1 FUNCTIONS
+
+=head2 make_handler
+
+Generates and evaluates the attribute handler code. It takes the name of the
+attribute to generate, the type of the variable it applies to - scalar, array,
+hash, general variable -, the name of the package that implements the
+C<tie()>, and the filename where that package lives in.
+
+It calls one of the C<make_tie_*()> functions that provides part of the code to
+generate depending on the tied variable type.
+
+=head2 make_tie_array
+
+Returns the code line for the tie of a scalar variable that is needed by
+C<make_handler()>.
+
+=head2 make_tie_hash
+
+Returns the code line for the tie of an array variable that is needed by
+C<make_handler()>.
+
+=head2 make_tie_scalar
+
+Returns the code line for the tie of a hash variable that is needed by
+C<make_handler()>.
+
+=head2 make_tie_var
+
+Is more flexible than the other C<make_tie_*()> functions in that it checks the
+type of the variable that the attribute is being applied to.
+
 =head1 EXAMPLES
 
     # Tie::Scalar::Timeout
@@ -246,10 +285,10 @@ omissions, please contact me at <marcel@codewerk.com>.
     # Tie::Hash::Rank
     my %scores : Ranked;
     %scores = (
-	Adams   => 78,
-	Davies  => 35,
-	Edwards => 84,
-	Thomas  => 47
+        Adams   => 78,
+        Davies  => 35,
+        Edwards => 84,
+        Thomas  => 47
     );
     print "$_: $scores{$_}\n" for qw(Adams Davies Edwards Thomas);
 
@@ -257,34 +296,39 @@ omissions, please contact me at <marcel@codewerk.com>.
     my $ff : FlipFlop(qw/Red Green/);
     print "$ff\n" for 1..5;
 
-=head1 BUGS AND LIMITATIONS
-
-No bugs have been reported.
-
-Please report any bugs or feature requests to
-C<bug-attribute-tieclasses@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.
-
 =head1 INSTALLATION
 
 See perlmodinstall for information and options on installing Perl modules.
 
+=head1 BUGS AND LIMITATIONS
+
+No bugs have been reported.
+
+Please report any bugs or feature requests through the web interface at
+L<http://rt.cpan.org/Public/Dist/Display.html?Name=Attribute-TieClasses>.
+
 =head1 AVAILABILITY
 
 The latest version of this module is available from the Comprehensive Perl
-Archive Network (CPAN). Visit <http://www.perl.com/CPAN/> to find a CPAN
-site near you. Or see <http://www.perl.com/CPAN/authors/id/M/MA/MARCEL/>.
+Archive Network (CPAN). Visit L<http://www.perl.com/CPAN/> to find a CPAN
+site near you, or see
+L<http://search.cpan.org/dist/Attribute-TieClasses/>.
+
+The development version lives at
+L<http://github.com/hanekomu/Attribute-TieClasses/>.
+Instead of sending patches, please fork this project using the standard git
+and github infrastructure.
 
 =head1 AUTHOR
 
-Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
+  Marcel Gruenauer <marcel@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2001-2007 by Marcel GrE<uuml>nauer
+This software is copyright (c) 2001 by Marcel Gruenauer.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
 
