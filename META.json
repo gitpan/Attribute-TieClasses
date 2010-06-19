@@ -1,39 +1,58 @@
 {
-   "resources" : {
-      "homepage" : "http://search.cpan.org/dist/Attribute-TieClasses/",
-      "repository" : "http://github.com/hanekomu/attribute-tieclasses",
-      "bugtracker" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Attribute-TieClasses"
-   },
-   "generated_by" : "Dist::Zilla version 1.100660",
-   "meta-spec" : {
-      "version" : 1.4,
-      "url" : "http://module-build.sourceforge.net/META-spec-v1.4.html"
-   },
-   "version" : "1.100710",
-   "name" : "Attribute-TieClasses",
+   "abstract" : "Attribute wrappers for CPAN Tie classes",
    "author" : [
       "Marcel Gruenauer <marcel@cpan.org>"
    ],
-   "license" : "perl",
-   "build_requires" : {},
-   "provides" : {
-      "Attribute::TieClasses" : {
-         "version" : "1.100710",
-         "file" : "lib/Attribute/TieClasses.pm"
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.101582, CPAN::Meta::Converter version 2.101591",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Attribute-TieClasses",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.31"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Attribute::Handlers" : 0,
+            "perl" : "5.008"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Carp" : 0,
+            "English" : 0,
+            "File::Find" : 0,
+            "File::Temp" : 0,
+            "Scalar::Util" : 0,
+            "Test::More" : "0.94"
+         }
       }
    },
-   "requires" : {
-      "Test::More" : "0",
-      "perl" : "5.008",
-      "Scalar::Util" : "0",
-      "Attribute::Handlers" : "0",
-      "English" : "0",
-      "File::Find" : "0",
-      "File::Temp" : "0",
-      "Carp" : "0"
+   "provides" : {
+      "Attribute::TieClasses" : {
+         "file" : "lib/Attribute/TieClasses.pm",
+         "version" : "1.101700"
+      }
    },
-   "abstract" : "Attribute wrappers for CPAN Tie classes",
-   "configure_requires" : {
-      "ExtUtils::MakeMaker" : "6.11"
-   }
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "mailto" : "bug-attribute-tieclasses at rt.cpan.org",
+         "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Attribute-TieClasses"
+      },
+      "homepage" : "http://search.cpan.org/dist/Attribute-TieClasses/",
+      "repository" : {
+         "url" : "http://github.com/hanekomu/Attribute-TieClasses"
+      }
+   },
+   "version" : "1.101700"
 }
+

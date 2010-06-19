@@ -3,9 +3,11 @@ use warnings;
 use strict;
 
 package Attribute::TieClasses;
-our $VERSION = '1.100710';
-# ABSTRACT: Attribute wrappers for CPAN Tie classes
+BEGIN {
+  $Attribute::TieClasses::VERSION = '1.101700';
+}
 
+# ABSTRACT: Attribute wrappers for CPAN Tie classes
 use Attribute::Handlers;
 no warnings 'redefine';
 
@@ -102,11 +104,11 @@ sub make_handler {
     my ($attr, $reftype, $tieclass, $filename) = @_;
     $filename ||= $tieclass;    # might be several classes in one file
     my $code = qq!
-	    sub UNIVERSAL::$attr : ATTR($reftype) {
-		my (\$ref, \$data) = \@_[2,4];
-		\$data = [ \$data ] unless ref \$data eq 'ARRAY';
-		eval "use $filename; 1";
-	!;
+        sub UNIVERSAL::$attr : ATTR($reftype) {
+        my (\$ref, \$data) = \@_[2,4];
+        \$data = [ \$data ] unless ref \$data eq 'ARRAY';
+        eval "use $filename; 1";
+    !;
     if    ($reftype eq 'SCALAR') { $code .= make_tie_scalar($tieclass) }
     elsif ($reftype eq 'ARRAY')  { $code .= make_tie_array($tieclass) }
     elsif ($reftype eq 'HASH')   { $code .= make_tie_hash($tieclass) }
@@ -124,12 +126,12 @@ sub make_tie_hash   { "tie \%\$ref, '$_[0]', \@\$data\n" }
 sub make_tie_var {
     my $tieclass = shift;
     return qq{
-		my \$type = ref \$ref;
-		 (\$type eq 'SCALAR')? tie \$\$ref,'$tieclass',\@\$data
-		:(\$type eq 'ARRAY') ? tie \@\$ref,'$tieclass',\@\$data
-		:(\$type eq 'HASH')  ? tie \%\$ref,'$tieclass',\@\$data
-		: die "Internal error: can't autotie \$type"
-	}
+        my \$type = ref \$ref;
+         (\$type eq 'SCALAR')? tie \$\$ref,'$tieclass',\@\$data
+        :(\$type eq 'ARRAY') ? tie \@\$ref,'$tieclass',\@\$data
+        :(\$type eq 'HASH')  ? tie \%\$ref,'$tieclass',\@\$data
+        : die "Internal error: can't autotie \$type"
+    }
 }
 1;
 
@@ -143,7 +145,7 @@ Attribute::TieClasses - Attribute wrappers for CPAN Tie classes
 
 =head1 VERSION
 
-version 1.100710
+version 1.101700
 
 =head1 SYNOPSIS
 
@@ -157,8 +159,8 @@ Damian Conway's wonderful C<Attribute::Handlers> module provides
 an easy way to use attributes for C<tie()>ing variables. In effect,
 the code in the synopsis is simply
 
-	use Attribute::Handlers
-	    autotie => { Timeout => 'Tie::Scalar::Timeout' };
+    use Attribute::Handlers
+        autotie => { Timeout => 'Tie::Scalar::Timeout' };
 
 Still, going one step further, it might be useful to have centrally
 defined attributes corresponding to commonly used Tie classes found
@@ -305,7 +307,7 @@ See perlmodinstall for information and options on installing Perl modules.
 No bugs have been reported.
 
 Please report any bugs or feature requests through the web interface at
-L<http://rt.cpan.org/Public/Dist/Display.html?Name=Attribute-TieClasses>.
+L<http://rt.cpan.org>.
 
 =head1 AVAILABILITY
 

@@ -2,7 +2,7 @@ NAME
     Attribute::TieClasses - Attribute wrappers for CPAN Tie classes
 
 VERSION
-    version 1.100710
+    version 1.101700
 
 SYNOPSIS
       use Attribute::TieClasses;
@@ -14,8 +14,8 @@ DESCRIPTION
     way to use attributes for "tie()"ing variables. In effect, the code in
     the synopsis is simply
 
-            use Attribute::Handlers
-                autotie => { Timeout => 'Tie::Scalar::Timeout' };
+        use Attribute::Handlers
+            autotie => { Timeout => 'Tie::Scalar::Timeout' };
 
     Still, going one step further, it might be useful to have centrally
     defined attributes corresponding to commonly used Tie classes found on
@@ -153,7 +153,7 @@ BUGS AND LIMITATIONS
     No bugs have been reported.
 
     Please report any bugs or feature requests through the web interface at
-    <http://rt.cpan.org/Public/Dist/Display.html?Name=Attribute-TieClasses>.
+    <http://rt.cpan.org>.
 
 AVAILABILITY
     The latest version of this module is available from the Comprehensive

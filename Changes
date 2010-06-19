@@ -1,5 +1,8 @@
 Revision history for Perl extension Attribute-TieClasses
 
+1.101700  2010-06-19 11:12:00 Europe/Vienna
+    - converted tabs to spaces
+
 1.100710  2010-03-12 16:07:34 Europe/Vienna
     - converted the distribution to Dist::Zilla-style
     - requires perl 5.8

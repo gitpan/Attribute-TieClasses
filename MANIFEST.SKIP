@@ -1,8 +1,8 @@
 # Version control files and dirs.
-bRCS\b
-bCVS\b
-.svn
-.git
+\bRCS\b
+\bCVS\b
+\.svn
+\.git
 ,v$
 
 # Makemaker/Build.PL generated files and dirs.
@@ -24,13 +24,14 @@ COVER.SKIP
 CPAN.SKIP
 t/000_standard__*
 Debian_CPANTS.txt
+nytprof.out
 
 # Temp, old, emacs, vim, backup files.
 ~$
-.old$
-.swp$
-.tar$
-.tar\.gz$
+\.old$
+\.swp$
+\.tar$
+\.tar\.gz$
 ^#.*#$
 ^\.#
 .shipit
